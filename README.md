@@ -73,6 +73,8 @@ Uses Android's MockLocationProvider to feed fake GPS coordinates along plausible
 
 Powered by a database of 800+ world city centers. Location selection is weighted by your demographics—if you report yourself as US Midwest, spoofing favors distant regions.
 
+**Setup:** Android requires you to designate the mock-location app explicitly. Enable Developer Options (Settings → About phone → tap Build Number 7 times), then Developer Options → "Select mock location app" → Fauxx. The Location Spoofing toggle surfaces this dialog on first enable. The Play Store build does not include this module; F-Droid / sideload only.
+
 ### 4. Fingerprint Rotation
 
 Continuously rotates User-Agent strings (from a pool of 275+ real-world UA strings), injects canvas fingerprint noise via JavaScript, randomizes Accept-Language and Accept-Encoding headers, and periodically resets the Android Advertising ID. This layer disrupts browser fingerprinting and device-level profiling.
@@ -120,7 +122,7 @@ Fauxx is built with privacy-first architecture:
 
 - Android SDK API 36 (build tools)
 - Kotlin compiler (bundled with Gradle)
-- JDK 25+
+- JDK 21 (LTS — matches F-Droid buildserver)
 
 ### Build from Source
 
@@ -335,11 +337,11 @@ Layer 2 reads your existing ad-platform interest profiles from Google Ads Settin
 A few mechanics worth knowing:
 
 - **Duration**: up to ~60 seconds. Each platform has a 30-second timeout, and Google + Facebook run sequentially.
-- **It does not log you in.** Fauxx reads cookies that are already on your device. You need to be signed into [myadcenter.google.com](https://myadcenter.google.com) and Facebook's ad preferences page in your default browser before tapping "Scrape Now," otherwise the scraper silently returns zero categories and "Last scraped" stays as "Never."
+- **It does not log you in.** Fauxx reads cookies that are already on your device. You need to be signed into [myadcenter.google.com](https://myadcenter.google.com) and Facebook's ad preferences page in your default browser before tapping "Scrape Now." If you're not signed in, Fauxx surfaces a dialog with direct links to those pages instead of silently failing.
 - **Read-only.** The scraper never modifies, clicks, or interacts with your ad-platform settings — it just reads what's already there.
 - **Runs on a 7-day schedule.** Once Layer 2 is enabled, Fauxx auto-refreshes the scrape every week on WiFi. "Scrape Now" is a manual override for immediate refresh (one-shot, works on cellular too).
 
-If you're on v0.2.6 or older and "Scrape Now" never seems to do anything, that's [issue #22](https://github.com/digital-grease/fauxx/issues/22) — fixed in v0.2.7. Update via F-Droid / Orion / GitHub Releases and the button will work as intended.
+If you're on v0.2.6 or older and "Scrape Now" never seems to do anything, that's [issue #22](https://github.com/digital-grease/fauxx/issues/22) — fixed in v0.2.7, with the needs-login dialog added in v0.2.8. Update via F-Droid / Orion / GitHub Releases.
 
 ### Why does the F-Droid build sometimes stop and show a "Tap to resume protection" notification?
 
