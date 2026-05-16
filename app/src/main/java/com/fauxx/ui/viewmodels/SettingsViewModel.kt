@@ -34,7 +34,8 @@ data class SettingsUiState(
     val allowedHoursStart: Int = 7,
     val allowedHoursEnd: Int = 23,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
-    val resumeOnBoot: Boolean = true
+    val resumeOnBoot: Boolean = true,
+    val customUserAgent: String = ""
 )
 
 /**
@@ -92,6 +93,7 @@ class SettingsViewModel @Inject constructor(
     fun setAllowedHoursEnd(v: Int) { update { it.copy(allowedHoursEnd = v) } }
     fun setThemeMode(mode: ThemeMode) { update { it.copy(themeMode = mode) } }
     fun setResumeOnBoot(v: Boolean) { update { it.copy(resumeOnBoot = v) } }
+    fun setCustomUserAgent(v: String) { update { it.copy(customUserAgent = v) } }
 
     /**
      * Persist the user's app-language choice and trigger the activity recreate that
@@ -147,7 +149,10 @@ class SettingsViewModel @Inject constructor(
                     allowedHoursStart = new.allowedHoursStart,
                     allowedHoursEnd = new.allowedHoursEnd,
                     themeMode = new.themeMode,
-                    resumeOnBoot = new.resumeOnBoot
+                    resumeOnBoot = new.resumeOnBoot,
+                    // Empty string in UI-state collapses to null in profile so the
+                    // engine treats "blank field" as "no override" cleanly.
+                    customUserAgent = new.customUserAgent.takeIf { it.isNotBlank() }
                 )
             }
         }
@@ -163,7 +168,8 @@ class SettingsViewModel @Inject constructor(
             allowedHoursStart = p.allowedHoursStart,
             allowedHoursEnd = p.allowedHoursEnd,
             themeMode = p.themeMode,
-            resumeOnBoot = p.resumeOnBoot
+            resumeOnBoot = p.resumeOnBoot,
+            customUserAgent = p.customUserAgent.orEmpty()
         )
     }
 }

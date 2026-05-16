@@ -822,6 +822,14 @@ class PoisonProfileRepository @Inject constructor(
         prefs[com.fauxx.di.PreferenceKeys.LAYER3_ENABLED] = p.layer3Enabled
         prefs[com.fauxx.di.PreferenceKeys.THEME_MODE] = p.themeMode.name
         prefs[com.fauxx.di.PreferenceKeys.RESUME_ON_BOOT] = p.resumeOnBoot
+        // Persist customUserAgent only when set; clear the key on null so a
+        // subsequent prefsToProfile read returns null, not stale empty string.
+        val ua = p.customUserAgent
+        if (ua.isNullOrBlank()) {
+            prefs.remove(com.fauxx.di.PreferenceKeys.CUSTOM_USER_AGENT)
+        } else {
+            prefs[com.fauxx.di.PreferenceKeys.CUSTOM_USER_AGENT] = ua
+        }
     }
 
     private fun prefsToProfile(prefs: androidx.datastore.preferences.core.Preferences): PoisonProfile =
@@ -853,6 +861,7 @@ class PoisonProfileRepository @Inject constructor(
                         ?: com.fauxx.ui.theme.ThemeMode.SYSTEM.name
                 )
             }.getOrDefault(com.fauxx.ui.theme.ThemeMode.SYSTEM),
-            resumeOnBoot = prefs[com.fauxx.di.PreferenceKeys.RESUME_ON_BOOT] ?: true
+            resumeOnBoot = prefs[com.fauxx.di.PreferenceKeys.RESUME_ON_BOOT] ?: true,
+            customUserAgent = prefs[com.fauxx.di.PreferenceKeys.CUSTOM_USER_AGENT]?.takeIf { it.isNotBlank() }
         )
 }

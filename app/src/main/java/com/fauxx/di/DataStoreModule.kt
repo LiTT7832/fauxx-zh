@@ -61,6 +61,12 @@ object PreferenceKeys {
     // BOOT_COMPLETED for our FGS types; this gates the notification path only.
     val RESUME_ON_BOOT = booleanPreferencesKey("resume_on_boot")
 
+    // Issue #7: when set, the engine uses this UA for ALL synthetic traffic
+    // instead of randomizing across the user_agents.json pool. Lets users match
+    // the synthetic-traffic UA to their real browser so the noise blends with
+    // their actual activity. Null/missing = default per-request rotation.
+    val CUSTOM_USER_AGENT = stringPreferencesKey("custom_user_agent")
+
     // App language override. Null/missing = follow system locale (filtered to a
     // SupportedLocale, fallback EN). Otherwise a SupportedLocale.tag value: "en", "es", "fr".
     // Read by com.fauxx.locale.LocaleManager.
