@@ -111,9 +111,9 @@ class LocaleIntegrationTest {
     }
 
     @Test
-    fun `SupportedLocale fromTag falls back to EN for unsupported language`() {
+    fun `SupportedLocale fromTag resolves correctly`() {
         assertEquals(SupportedLocale.EN, SupportedLocale.fromTag("de"))
-        assertEquals(SupportedLocale.EN, SupportedLocale.fromTag("zh-CN"))
+        assertEquals(SupportedLocale.ZH, SupportedLocale.fromTag("zh-CN"))
         assertEquals(SupportedLocale.EN, SupportedLocale.fromTag(null))
         assertEquals(SupportedLocale.EN, SupportedLocale.fromTag(""))
         assertEquals(SupportedLocale.ES, SupportedLocale.fromTag("es-MX"))
