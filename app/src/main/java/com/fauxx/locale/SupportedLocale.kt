@@ -32,7 +32,8 @@ enum class SupportedLocale(
 ) {
     EN("en", "English", "US", ""),
     ES("es", "Español", "ES", "es."),
-    FR("fr", "Français", "FR", "fr.");
+    FR("fr", "Français", "FR", "fr."),
+    ZH("zh", "中文", "CN", "");
 
     /** Build a [java.util.Locale] for use with system APIs (Configuration, formatters, etc.). */
     fun toLocale(): Locale = Locale.forLanguageTag(tag)

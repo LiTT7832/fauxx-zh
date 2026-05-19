@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fauxx</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">隐私保护</string>
+    <string name="notification_channel_desc">Fauxx 后台浏览多样化通知</string>
+    <string name="notification_title">Fauxx</string>
+    <string name="notification_active">正在生成多样化浏览活动 — 今日 %d 次操作</string>
+    <string name="notification_paused_wifi">已暂停 — 等待 WiFi</string>
+    <string name="notification_paused_battery">已暂停 — 电量过低</string>
+    <string name="notification_paused_rate_limit">已暂停 — 达到每小时上限</string>
+    <string name="notification_stopped">已停止</string>
+    <string name="notification_initializing">正在初始化…</string>
+    <string name="notification_action_open">打开</string>
+    <string name="notification_action_stop">停止</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">FAUXX</string>
+    <string name="onboarding_subtitle">用噪声保护隐私</string>
+    <string name="onboarding_intro">Fauxx 通过在后台生成合成浏览活动来保护您的隐私。它会执行以下操作：</string>
+    <string name="onboarding_bullet_search">在 Google、Bing、DuckDuckGo 和 Yahoo 上搜索各种主题</string>
+    <string name="onboarding_bullet_browse">访问各种网站以丰富您的浏览画像</string>
+    <string name="onboarding_bullet_fingerprint">轮换浏览器指纹（User-Agent、语言标头）</string>
+    <string name="onboarding_bullet_dns">为不同域名生成 DNS 查询</string>
+    <string name="onboarding_bullet_battery">所有活动在后台运行，消耗电量和流量</string>
+    <string name="onboarding_optional_profile">您可以在接下来的页面中选择性地告诉我们一些关于您的信息。这些信息仅保存在您的设备上，有助于生成与您真实画像不同的噪声。如果您偏好均匀噪声，可以跳过。</string>
+    <string name="onboarding_done_title">设置完成！</string>
+    <string name="onboarding_done_body">Fauxx 将生成与您真实行为信号差异化最大的多样化浏览活动。从仪表盘开启保护即可开始。</string>
+    <string name="onboarding_skip">跳过</string>
+    <string name="onboarding_skip_all">全部跳过</string>
+    <string name="onboarding_next">下一步</string>
+    <string name="onboarding_done">完成</string>
+
+    <!-- Onboarding steps -->
+    <string name="onboarding_age_title">您的年龄段？</string>
+    <string name="onboarding_age_subtitle">帮助我们避免生成与您人口统计特征匹配的活动</string>
+    <string name="onboarding_gender_title">性别</string>
+    <string name="onboarding_gender_subtitle">可选 — 仅用于将噪声偏向远离您的人口统计特征</string>
+    <string name="onboarding_interests_title">您的主要兴趣</string>
+    <string name="onboarding_interests_subtitle">我们将在其他类别中生成更多噪声</string>
+    <string name="onboarding_custom_interests_title">或添加自定义兴趣</string>
+    <string name="onboarding_custom_interests_subtitle">输入上面未涵盖的特定兴趣（例如"木工"、"加密货币"）</string>
+    <string name="onboarding_profession_title">职业</string>
+    <string name="onboarding_profession_subtitle">仅用于计算人口统计距离</string>
+    <string name="onboarding_region_title">您位于哪里？</string>
+    <string name="onboarding_region_subtitle">用于生成暗示其他地区的搜索和浏览活动</string>
+
+    <!-- Consent dialog -->
+    <string name="consent_title">开始之前</string>
+    <string name="consent_intro">Fauxx 将执行以下后台活动：</string>
+    <string name="consent_bullet_search">在 Google、Bing、DuckDuckGo 和 Yahoo 上搜索各种主题</string>
+    <string name="consent_bullet_browse">访问各种网站以扩展您的浏览画像</string>
+    <string name="consent_bullet_fingerprint">轮换浏览器指纹（User-Agent、语言标头）</string>
+    <string name="consent_bullet_dns">在各个域名上生成 DNS 查询</string>
+    <string name="consent_bullet_battery">在后台运行时消耗电量和流量</string>
+    <string name="consent_footer">所有活动均为合成数据，仅保存在您的设备上。不收集或传输任何个人数据。</string>
+    <string name="consent_accept">我了解，开始</string>
+    <string name="consent_cancel">取消</string>
+
+    <!-- About & Privacy -->
+    <string name="about_title">关于与隐私</string>
+    <string name="about_app_description">一款开源隐私工具，通过从您的设备生成持续、看似合理的、偏离人口统计特征的合成活动来污染数据经纪商和广告技术画像。</string>
+    <string name="about_privacy_title">隐私政策</string>
+    <string name="about_data_on_device_title">保存在您设备上的数据</string>
+    <string name="about_data_on_device_body">所有个人数据仅保留在您的设备上，并加密存储：\n\n\u2022 人口统计画像（年龄、性别、兴趣、职业、地区）\n\u2022 广告平台画像缓存（抓取的兴趣类别）\n\u2022 合成人格历史\n\u2022 操作审计日志\n\n这些数据存储在加密数据库（SQLCipher）中，密钥由 Android Keystore 管理。数据绝不会以任何形式离开您的设备。</string>
+    <string name="about_network_title">应用发出的网络请求</string>
+    <string name="about_network_body">Fauxx 生成合成浏览活动来混淆跟踪画像。这意味着该应用会：\n\n\u2022 在 Google、Bing、DuckDuckGo 和 Yahoo 上执行搜索\n\u2022 访问分类 URL 以积累多样化的跟踪 Cookie\n\u2022 在后台 WebView 中加载各种页面\n\u2022 解析域名以产生 DNS 查询噪声\n\u2022 为偏离画像的应用打开应用商店深层链接\n\n所有请求使用随机化的 User-Agent 标头，并设有速率限制以避免干扰目标服务。被屏蔽的域名（私有网络、有害内容）绝不会被访问。</string>
+    <string name="about_not_collected_title">我们不收集的内容</string>
+    <string name="about_not_collected_body">\u2022 不收集任何分析或遥测数据\n\u2022 不向外部服务发送崩溃报告\n\u2022 不使用广告标识符或跟踪像素\n\u2022 不设服务器端账户或云存储\n\u2022 不与第三方共享任何数据\n\nFauxx 没有后端服务器。该应用完全自包含。</string>
+    <string name="about_location_title">位置信号噪声</string>
+    <string name="about_location_body">如果启用，位置信号模块会生成搜索查询并访问暗示您实际所在地以外地区活动的网站，使数据经纪商更难定位您的居住地。</string>
+    <string name="about_deletion_title">数据删除</string>
+    <string name="about_deletion_body">您可以随时通过"设置" > "清除所有数据"删除所有已存储的数据。这将永久删除您的人口统计画像、平台缓存、人格历史、操作日志，并将所有设置恢复为默认值。卸载应用也会删除所有数据。</string>
+    <string name="about_privacy_url">https://github.com/digital-grease/fauxx/blob/main/PRIVACY.md</string>
+    <string name="about_view_full_policy">在线查看完整隐私政策</string>
+    <string name="about_license_title">许可证</string>
+    <string name="about_license_body">Fauxx 是开源软件。源代码和许可证详情可在项目仓库中获取。</string>
+
+    <!-- Support -->
+    <string name="about_support_title">支持</string>
+    <string name="about_support_body">如果您觉得 Fauxx 有用，请考虑请我喝杯咖啡。</string>
+    <string name="about_support_button">请我喝杯咖啡</string>
+
+    <!-- Play Store flavor: full-version notice -->
+    <string name="full_version_notice_title">Play Store 精简版</string>
+    <string name="full_version_notice_body">为遵守 Play Store 政策，此版本禁用了广告画像污染和 GPS 位置伪造。如需获取完整无限制的 Fauxx 版本，请从 F-Droid 或 GitHub 安装。</string>
+    <string name="full_version_notice_fdroid">F-Droid</string>
+    <string name="full_version_notice_github">GitHub</string>
+    <string name="full_version_notice_dismiss">不再显示</string>
+    <string name="full_version_fdroid_url">https://f-droid.org/packages/com.fauxx.full/</string>
+    <string name="full_version_github_url">https://github.com/digital-grease/fauxx/releases</string>
+
+    <!-- Settings: app language -->
+    <string name="settings_language_title">应用语言</string>
+    <string name="settings_language_subtitle_system">跟随设备语言</string>
+    <string name="settings_language_subtitle_explicit">合成活动也将使用此语言</string>
+    <string name="settings_language_system_default">系统默认</string>
+    <string name="settings_language_coming_soon">即将推出</string>
+
+    <!-- Demographic enum labels (onboarding pickers) -->
+    <string name="age_18_24">18–24</string>
+    <string name="age_25_34">25–34</string>
+    <string name="age_35_44">35–44</string>
+    <string name="age_45_54">45–54</string>
+    <string name="age_55_64">55–64</string>
+    <string name="age_65_plus">65+</string>
+
+    <string name="gender_male">男</string>
+    <string name="gender_female">女</string>
+    <string name="gender_prefer_not_to_say">不愿透露</string>
+
+    <string name="profession_student">学生</string>
+    <string name="profession_teacher">教师</string>
+    <string name="profession_engineer">工程师</string>
+    <string name="profession_healthcare">医疗工作者</string>
+    <string name="profession_legal">法律</string>
+    <string name="profession_finance_prof">商业 / 金融</string>
+    <string name="profession_retail">零售业</string>
+    <string name="profession_trades">技术工种</string>
+    <string name="profession_creative">创意行业</string>
+    <string name="profession_retired">退休</string>
+    <string name="profession_homemaker">家庭主妇/主夫</string>
+    <string name="profession_other">其他</string>
+
+    <string name="region_us_northeast">美国东北部</string>
+    <string name="region_us_southeast">美国东南部</string>
+    <string name="region_us_midwest">美国中西部</string>
+    <string name="region_us_southwest">美国西南部</string>
+    <string name="region_us_west">美国西部</string>
+    <string name="region_canada">加拿大</string>
+    <string name="region_uk">英国</string>
+    <string name="region_western_europe">西欧</string>
+    <string name="region_eastern_europe">东欧</string>
+    <string name="region_asia_pacific">亚太地区</string>
+    <string name="region_latin_america">拉丁美洲</string>
+    <string name="region_middle_east_africa">中东和非洲</string>
+    <string name="region_spain">西班牙</string>
+    <string name="region_mexico">墨西哥</string>
+    <string name="region_argentina">阿根廷</string>
+    <string name="region_colombia">哥伦比亚</string>
+    <string name="region_chile">智利</string>
+    <string name="region_peru">秘鲁</string>
+    <string name="region_france">法国</string>
+    <string name="region_quebec">魁北克</string>
+    <string name="region_belgium">比利时</string>
+    <string name="region_switzerland">瑞士</string>
+    <string name="region_other">其他</string>
+
+    <!-- Onboarding misc -->
+    <string name="onboarding_add_interest_cd">添加兴趣</string>
+    <string name="onboarding_remove_cd">移除</string>
+    <string name="onboarding_unmapped_suffix">未映射</string>
+    <string name="onboarding_custom_interest_placeholder">例如：木工</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">FAUXX</string>
+    <string name="dashboard_active">运行中</string>
+    <string name="dashboard_paused">已暂停</string>
+    <string name="dashboard_inactive">未运行</string>
+    <string name="dashboard_today">今日</string>
+    <string name="dashboard_this_week">本周</string>
+
+    <!-- FAQ screen (reached from the Help dropdown) -->
+    <string name="faq_title">常见问题</string>
+    <string name="faq_back">返回</string>
+    <string name="help_menu_faq">常见问题</string>
+    <string name="faq_q1_question">为什么 Fauxx 有时会停止并显示"点击恢复保护"通知？</string>
+    <string name="faq_q1_answer">Android 14 及更高版本将 Fauxx 使用的后台服务类型限制为在后台运行时每 24 小时累计 6 小时。为安全地保持在此上限之下，Fauxx 会提前自动停止，并发送一键通知以便您下次拿起手机时恢复。\n\n您通常会在以下情况看到此通知：\n\n• 如果您配置了安静时段（默认 7:00–23:00），Fauxx 会在 23:00 停止并在 7:00 以点击恢复的方式重新出现，而不是在夜间闲置消耗每日预算。\n• 持续后台运行约 5 小时后。Fauxx 在 5 小时时自动停止，留有 1 小时安全余量。\n• 如果您启用了"仅 WiFi"，在长时间无 WiFi 暂停后。持续暂停超过 30 分钟会释放时间配额。\n\n点击通知即可打开 Fauxx 并重启保护。不会丢失任何内容——您的设置、画像、人格和操作日志都是持久保存的。\n\n这主要影响 F-Droid / sideload 版本。Play Store 版本使用不同的前台服务类型，不受 6 小时限制；除此之外行为完全一致。</string>
+    <string name="faq_q2_question">有时我启用保护后它几乎立即就停止了——为什么？</string>
+    <string name="faq_q2_answer">Fauxx 会追踪您过去 24 小时内使用的前台服务时间，并在应用重启时保持记录。如果您今天已经使用了大部分每日预算——例如今天已经运行了 4 小时——新会话在限额重置之前可用的时间就较少。Fauxx 会启动，发现没有可用余量，并发送预定在预算窗口到期时的点击恢复通知。\n\n您可以等待稍后的通知触发，或者检查"设置" → "活跃时段"和"仅 WiFi"，确认您的约束设置没有导致引擎暂停。</string>
+    <string name="faq_q3_question">为什么旧版本的 Fauxx 会在夜间崩溃？</string>
+    <string name="faq_q3_answer">此版本之前的版本在长时间暂停期间不会主动停止前台服务，因此可能在闲置期间（例如在配置的安静时段）累积满 6 小时的运行时间。当 Android 14+ 强制执行限制时，系统会以 ForegroundServiceDidNotStopInTimeException 强制终止进程。此版本添加了预算追踪器和上述的点击恢复流程，因此崩溃不应再发生。\n\n如果您仍然遇到崩溃，请通过"设置"屏幕（"提交 GitHub Issue"）提交问题。</string>
+    <string name="faq_q4_question">仪表盘上的"噪声比率"是什么意思？</string>
+    <string name="faq_q4_answer">这是一个吞吐量指标：今日操作数除以 500，上限为 100%。每日 500 次操作即视为 100% 饱和。\n\n它不衡量噪声的质量——合成活动是否命中了偏离画像的类别、是否骗过了画像系统、是否覆盖了多样化的主题范围。它只是一个速率指标。\n\n要查看噪声实际去向，请查看"定向"屏幕的类别权重图表。红色条表示 Fauxx 正在抑制的类别（因为它们与您的真实画像匹配），绿色条表示正在增强的类别，灰色表示中性。</string>
+    <string name="faq_q5_question">"对抗性抓取器"（第 2 层）如何工作？为什么有时显示"上次抓取：从未"？</string>
+    <string name="faq_q5_answer">第 2 层从 Google Ads 设置和 Facebook Ad Preferences 读取您现有的广告平台兴趣画像。它利用这些信息找出广告网络已经了解您的类别，然后告诉引擎抑制这些类别——让合成活动远离您的真实画像。\n\n需要注意的事项：\n\n• 耗时约 60 秒：每个平台有 30 秒超时，Google 和 Facebook 依次运行。\n• 不会为您登录。Fauxx 读取您设备上已有的 Cookie。您需要先在浏览器中登录 myadcenter.google.com 和 Facebook 的广告偏好页面，否则抓取器会静默返回零个类别，"上次抓取"保持为"从未"。\n• 只读。抓取器从不修改、点击或与您的广告平台设置交互——它只读取已有内容。\n• 一旦启用第 2 层，会在 WiFi 上每 7 天自动刷新。"立即抓取"是手动覆盖，在蜂窝网络上也可使用。\n\n如果您使用 v0.2.6 或更早版本，且"立即抓取"似乎无效，这是 v0.2.7 中修复的一个 bug。</string>
+</resources>
