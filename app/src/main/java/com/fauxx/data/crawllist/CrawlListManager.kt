@@ -144,10 +144,7 @@ class CrawlListManager @Inject constructor(
         val legacyPath = "crawl_urls.json"
         return try {
             val stream = runCatching { context.assets.open(localePath) }
-                .getOrElse {
-                    if (locale == SupportedLocale.EN) context.assets.open(legacyPath)
-                    else throw it
-                }
+                .getOrElse { context.assets.open(legacyPath) }
             val json = stream.bufferedReader().readText()
             val type = object : TypeToken<List<CrawlEntryJson>>() {}.type
             val raw: List<CrawlEntryJson> = Gson().fromJson(json, type)

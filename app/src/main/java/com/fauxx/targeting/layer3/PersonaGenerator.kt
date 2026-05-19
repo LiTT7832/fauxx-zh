@@ -243,10 +243,7 @@ class PersonaGenerator @Inject constructor(
         val legacyPath = "persona_templates.json"
         return try {
             val stream = runCatching { context.assets.open(localePath) }
-                .getOrElse {
-                    if (locale == SupportedLocale.EN) context.assets.open(legacyPath)
-                    else throw it
-                }
+                .getOrElse { context.assets.open(legacyPath) }
             val json = stream.bufferedReader().readText()
             val type = object : TypeToken<List<PersonaTemplate>>() {}.type
             gson.fromJson(json, type)

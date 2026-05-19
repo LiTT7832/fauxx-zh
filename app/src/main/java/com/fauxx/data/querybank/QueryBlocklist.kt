@@ -103,7 +103,7 @@ class QueryBlocklist @Inject constructor(
     private fun loadFor(locale: SupportedLocale): BlocklistData {
         val localePath = "harmful_queries/${locale.tag}.json"
         val parsed = tryLoadFile(localePath)
-            ?: if (locale == SupportedLocale.EN) tryLoadFile(LEGACY_PATH) else null
+            ?: tryLoadFile(LEGACY_PATH) // fall back to English blocklist for UI-only locales
 
         if (parsed == null) {
             Timber.e(
