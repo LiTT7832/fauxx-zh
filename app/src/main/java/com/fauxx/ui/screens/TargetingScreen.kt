@@ -506,7 +506,7 @@ private fun ScrapeNeedsLoginDialog(onDismiss: () -> Unit) {
                     "请注意：Fauxx 的抓取器拥有自己的浏览器会话，与您可能已登录的 Chrome/Brave/Firefox 相互独立——" +
                     "Android 不允许应用之间共享登录 Cookie。而且 Google/" +
                     "Facebook 也不允许从应用内浏览器登录，因此" +
-                    "无法提供"在此登录"按钮。\n\n" +
+                    "无法提供\u201c在此登录\u201d按钮。\n\n" +
                     "第 2 层正在重新设计，以直接导入您的广告画像" +
                     "（通过 Google Takeout 或浏览器书签工具），从而完全不需要" +
                     "实时会话。同时，第 1 层和第 3 层仍然可以在没有任何抓取的情况下正常工作。"

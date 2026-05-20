@@ -631,7 +631,7 @@ private fun BatteryOptimizationDialog(onAllow: () -> Unit, onDismiss: () -> Unit
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    text = "在下一个屏幕上，选择"允许"以使引擎在屏幕关闭时也能持续生成合成活动。",
+                    text = "在下一个屏幕上，选择\u201c允许\u201d以使引擎在屏幕关闭时也能持续生成合成活动。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
