@@ -18,7 +18,7 @@ class ActionTypeLabelTest {
 
     @Test
     fun locationSpoof_rendersAsLocation_notTruncated() {
-        assertEquals("LOCATION", ActionType.LOCATION_SPOOF.label)
+        assertEquals("位置", ActionType.LOCATION_SPOOF.label)
     }
 
     @Test
