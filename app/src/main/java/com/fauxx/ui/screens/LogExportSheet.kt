@@ -77,7 +77,7 @@ fun LogExportSheet(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "All personal data has been scrubbed from the logs.",
+                text = "日志中的所有个人数据已被清除。",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -85,9 +85,8 @@ fun LogExportSheet(
 
             ExportOption(
                 icon = { Icon(Icons.Outlined.BugReport, contentDescription = null, modifier = Modifier.size(24.dp)) },
-                label = "File a GitHub Issue",
-                description = "Opens a pre-filled issue form. Logs are embedded directly when they fit, " +
-                    "otherwise copied to your clipboard for pasting below.",
+                label = "提交 GitHub Issue",
+                description = "打开预填的问题表单。日志如果合适则直接嵌入，否则复制到剪贴板供您在下方粘贴。",
                 onClick = {
                     openGitHubIssue(context, fileName, content)
                     onDismiss()
@@ -96,8 +95,8 @@ fun LogExportSheet(
 
             ExportOption(
                 icon = { Icon(Icons.Outlined.Share, contentDescription = null, modifier = Modifier.size(24.dp)) },
-                label = "Share via...",
-                description = "Send to email, Slack, or another app",
+                label = "通过…分享",
+                description = "发送到邮件、Slack 或其他应用",
                 onClick = {
                     shareViaIntent(context, content, fileName, title)
                     onDismiss()
@@ -106,8 +105,8 @@ fun LogExportSheet(
 
             ExportOption(
                 icon = { Icon(Icons.Outlined.Save, contentDescription = null, modifier = Modifier.size(24.dp)) },
-                label = "Save to device",
-                description = "Saves to Downloads folder",
+                label = "保存到设备",
+                description = "保存到下载文件夹",
                 onClick = {
                     saveToDownloads(context, content, fileName)
                     onDismiss()
@@ -116,8 +115,8 @@ fun LogExportSheet(
 
             ExportOption(
                 icon = { Icon(Icons.Outlined.ContentCopy, contentDescription = null, modifier = Modifier.size(24.dp)) },
-                label = "Copy to clipboard",
-                description = "Copy the full log text",
+                label = "复制到剪贴板",
+                description = "复制完整日志文本",
                 onClick = {
                     copyToClipboard(context, content)
                     onDismiss()
@@ -178,7 +177,7 @@ private fun openGitHubIssue(context: Context, fileName: String, content: String)
             is CrashReportUrlBuilder.Result.Embedded -> {
                 Toast.makeText(
                     context,
-                    "Crash report ready — review and submit",
+                    "崩溃报告已就绪 — 请审阅并提交",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -188,14 +187,14 @@ private fun openGitHubIssue(context: Context, fileName: String, content: String)
                 copyToClipboard(context, result.fullTrace, silent = true)
                 Toast.makeText(
                     context,
-                    "Truncated trace embedded; full trace on clipboard — paste below if you want the full context",
+                    "已嵌入截断的堆栈跟踪；完整跟踪在剪贴板 — 如需完整上下文请粘贴在下方",
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
     } catch (_: ActivityNotFoundException) {
         copyToClipboard(context, content, silent = true)
-        Toast.makeText(context, "No browser found — logs copied to clipboard", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "未找到浏览器 — 日志已复制到剪贴板", Toast.LENGTH_LONG).show()
     }
 }
 
@@ -205,7 +204,7 @@ private fun openBugReportForm(context: Context) {
     try {
         context.startActivity(intent)
     } catch (_: ActivityNotFoundException) {
-        Toast.makeText(context, "No browser found to open issue tracker", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "未找到浏览器以打开问题跟踪器", Toast.LENGTH_LONG).show()
     }
 }
 
@@ -223,19 +222,19 @@ private fun shareViaIntent(context: Context, content: String, fileName: String, 
         type = "text/plain"
         putExtra(Intent.EXTRA_STREAM, uri)
         putExtra(Intent.EXTRA_SUBJECT, subject)
-        putExtra(Intent.EXTRA_TEXT, "Fauxx $subject — see attached file.")
+        putExtra(Intent.EXTRA_TEXT, "Fauxx $subject — 请查看附件。")
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
     try {
         context.startActivity(Intent.createChooser(intent, subject))
     } catch (_: ActivityNotFoundException) {
-        Toast.makeText(context, "No sharing app found", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "未找到分享应用", Toast.LENGTH_LONG).show()
     }
 }
 
 private fun saveToDownloads(context: Context, content: String, fileName: String) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-        Toast.makeText(context, "Save to Downloads requires Android 10+", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "保存到下载文件夹需要 Android 10+", Toast.LENGTH_SHORT).show()
         return
     }
     val values = ContentValues().apply {
@@ -246,9 +245,9 @@ private fun saveToDownloads(context: Context, content: String, fileName: String)
     val uri = context.contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values)
     if (uri != null) {
         context.contentResolver.openOutputStream(uri)?.use { it.write(content.toByteArray()) }
-        Toast.makeText(context, "Saved to Downloads/$fileName", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "已保存到 下载/$fileName", Toast.LENGTH_SHORT).show()
     } else {
-        Toast.makeText(context, "Failed to save file", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "保存文件失败", Toast.LENGTH_SHORT).show()
     }
 }
 
@@ -256,6 +255,6 @@ private fun copyToClipboard(context: Context, content: String, silent: Boolean =
     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     clipboard.setPrimaryClip(ClipData.newPlainText("Fauxx Logs", content))
     if (!silent) {
-        Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "已复制到剪贴板", Toast.LENGTH_SHORT).show()
     }
 }

@@ -57,14 +57,14 @@ private const val ISSUES_URL = "https://github.com/digital-grease/fauxx/issues/n
 
 /** Navigation destinations. */
 sealed class Screen(val route: String, val label: String) {
-    object Dashboard : Screen("dashboard", "Dashboard")
-    object Targeting : Screen("targeting", "Targeting")
-    object Modules : Screen("modules", "Modules")
-    object Log : Screen("log", "Log")
-    object Settings : Screen("settings", "Settings")
-    object Onboarding : Screen("onboarding", "Onboarding")
-    object About : Screen("about", "About & Privacy")
-    object Faq : Screen("faq", "FAQ")
+    object Dashboard : Screen("dashboard", "仪表盘")
+    object Targeting : Screen("targeting", "定向")
+    object Modules : Screen("modules", "模块")
+    object Log : Screen("log", "日志")
+    object Settings : Screen("settings", "设置")
+    object Onboarding : Screen("onboarding", "引导")
+    object About : Screen("about", "关于与隐私")
+    object Faq : Screen("faq", "常见问题")
 }
 
 private val bottomNavItems = listOf(
@@ -174,7 +174,7 @@ private fun HelpMenuButton(
         IconButton(onClick = { expanded = true }) {
             Icon(
                 imageVector = Icons.AutoMirrored.Outlined.HelpOutline,
-                contentDescription = "Help",
+                contentDescription = "帮助",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -193,7 +193,7 @@ private fun HelpMenuButton(
                 }
             )
             DropdownMenuItem(
-                text = { Text("Help") },
+                text = { Text("帮助") },
                 leadingIcon = { Icon(Icons.AutoMirrored.Outlined.MenuBook, contentDescription = null) },
                 onClick = {
                     expanded = false
@@ -201,7 +201,7 @@ private fun HelpMenuButton(
                 }
             )
             DropdownMenuItem(
-                text = { Text("Contact us") },
+                text = { Text("联系我们") },
                 leadingIcon = { Icon(Icons.Outlined.BugReport, contentDescription = null) },
                 onClick = {
                     expanded = false

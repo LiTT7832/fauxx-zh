@@ -20,26 +20,24 @@ fun CrashReportDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                "Fauxx Crashed",
+                "Fauxx 已崩溃",
                 fontFamily = FontFamily.Monospace,
                 color = MaterialTheme.colorScheme.error
             )
         },
         text = {
             Text(
-                "Fauxx crashed during the last session. " +
-                    "You can share the crash report to help diagnose the issue. " +
-                    "The report has been scrubbed of personal data."
+                "Fauxx 在上次会话中崩溃。您可以分享崩溃报告以帮助诊断问题。报告中的个人数据已被清除。"
             )
         },
         confirmButton = {
             TextButton(onClick = onShare) {
-                Text("Share Report")
+                Text("分享报告")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Dismiss")
+                Text("忽略")
             }
         }
     )

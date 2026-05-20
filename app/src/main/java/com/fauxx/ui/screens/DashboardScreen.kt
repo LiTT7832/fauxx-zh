@@ -159,9 +159,8 @@ fun DashboardScreen(
         // Notification permission warning
         if (notificationDenied) {
             WarningCard(
-                text = "Notification permission denied — background activity indicator is hidden. " +
-                    "Grant notification permission in Settings to see the status notification.",
-                actionLabel = "Open settings",
+                text = "未授予通知权限 — 后台活动指示器已隐藏。请在系统设置中授予通知权限以查看状态通知。",
+                actionLabel = "打开设置",
                 onAction = {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                         data = Uri.fromParts("package", context.packageName, null)
@@ -175,10 +174,8 @@ fun DashboardScreen(
         // the app isn't on the unrestricted list. Shown until the user grants exemption.
         if (batteryOptimized && uiState.engineEnabled) {
             WarningCard(
-                text = "Android battery optimization is restricting Fauxx. " +
-                    "Background activity will pause when the screen is off. " +
-                    "Allow unrestricted background usage to keep the engine running.",
-                actionLabel = "Allow",
+                text = "Android 电池优化正在限制 Fauxx。屏幕关闭时后台活动将暂停。请允许不受限制的后台使用以保持引擎运行。",
+                actionLabel = "允许",
                 onAction = { showBatteryExplainer = true }
             )
         }
@@ -276,9 +273,9 @@ private fun ProtectionCard(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = when {
-                            isPaused -> "PAUSED"
-                            enabled -> "ACTIVE"
-                            else -> "INACTIVE"
+                            isPaused -> "已暂停"
+                            enabled -> "运行中"
+                            else -> "未运行"
                         },
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold,
@@ -290,12 +287,12 @@ private fun ProtectionCard(
                     )
                     Text(
                         text = when (engineState) {
-                            EngineState.ACTIVE -> "Generating synthetic activity"
-                            EngineState.PAUSED_WIFI -> "Wi-Fi only mode — waiting for Wi-Fi"
-                            EngineState.PAUSED_BATTERY -> "Battery below threshold"
-                            EngineState.PAUSED_RATE_LIMIT -> "Hourly rate limit reached"
-                            EngineState.PAUSED_QUIET_HOURS -> "Outside active hours"
-                            EngineState.STOPPED -> "Engine stopped"
+                            EngineState.ACTIVE -> "正在生成合成活动"
+                            EngineState.PAUSED_WIFI -> "仅 Wi-Fi 模式 — 等待 Wi-Fi"
+                            EngineState.PAUSED_BATTERY -> "电量低于阈值"
+                            EngineState.PAUSED_RATE_LIMIT -> "达到每小时上限"
+                            EngineState.PAUSED_QUIET_HOURS -> "超出活跃时段"
+                            EngineState.STOPPED -> "引擎已停止"
                         },
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -311,7 +308,7 @@ private fun ProtectionCard(
                     onClick = onUseMobileData,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Use mobile data")
+                    Text("使用移动数据")
                 }
             }
         }
@@ -324,8 +321,8 @@ private fun CounterRow(actionsToday: Int, actionsThisWeek: Int) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        StatCard(label = "TODAY", value = actionsToday.toString(), modifier = Modifier.weight(1f))
-        StatCard(label = "THIS WEEK", value = actionsThisWeek.toString(), modifier = Modifier.weight(1f))
+        StatCard(label = "今日", value = actionsToday.toString(), modifier = Modifier.weight(1f))
+        StatCard(label = "本周", value = actionsThisWeek.toString(), modifier = Modifier.weight(1f))
     }
 }
 
@@ -378,7 +375,7 @@ private fun buildChartSlices(
         cat.name.lowercase().replace("_", " ") to w
     }
     val otherWeight = sorted.drop(MAX_CHART_SLICES).sumOf { it.value.toDouble() }.toFloat()
-    return if (otherWeight > 0f) top + ("other" to otherWeight) else top
+    return if (otherWeight > 0f) top + ("其他" to otherWeight) else top
 }
 
 @Composable
@@ -391,10 +388,8 @@ private fun CategoryDonutCard(distribution: Map<CategoryPool, Float>) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             SectionHeaderWithHelp(
-                title = "CATEGORY DISTRIBUTION",
-                help = "Shows how your synthetic noise is spread across topic categories. " +
-                    "A wider spread means trackers see a more confused profile. " +
-                    "Categories are weighted by the targeting engine to maximize distance from your real interests."
+                title = "类别分布",
+                help = "显示合成噪声在各主题类别中的分布。分布越广泛，追踪器看到的画像越混乱。类别由定向引擎加权以最大化与您真实兴趣的距离。"
             )
             Spacer(Modifier.height(12.dp))
 
@@ -477,12 +472,9 @@ private fun PersonaCard(name: String, ageRange: String, profession: String, inte
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             SectionHeaderWithHelp(
-                title = "ACTIVE PERSONA",
+                title = "活跃人格",
                 titleColor = MaterialTheme.colorScheme.secondary,
-                help = "A synthetic identity the engine adopts for about a week. " +
-                    "Activity is weighted toward this persona's interests to create " +
-                    "temporally coherent noise — making it harder for trackers to " +
-                    "filter out the fake signal. Personas rotate automatically."
+                help = "引擎大约每周采用一个合成身份。活动会偏向此人格的兴趣方向，生成具有时间连贯性的噪声——使追踪器更难过滤掉假信号。人格会自动轮换。"
             )
             Spacer(Modifier.height(8.dp))
             Text(
@@ -563,10 +555,8 @@ private fun NoiseRatioCard(ratio: Float) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 SectionHeaderWithHelp(
-                    title = "NOISE RATIO",
-                    help = "Estimates how much of your visible browsing profile is synthetic noise " +
-                        "vs real activity. Higher is better — at 80%+, a data broker would need " +
-                        "to correctly identify 4 out of 5 signals as fake to build an accurate profile."
+                    title = "噪声比率",
+                    help = "估算您可见浏览画像中合成噪声与真实活动的比例。越高越好——达到 80% 以上时，数据经纪商需要正确识别 5 个信号中的 4 个为假才能构建准确画像。"
                 )
                 Text(
                     text = "${(animated * 100).toInt()}%",
@@ -630,20 +620,18 @@ private fun BatteryOptimizationDialog(onAllow: () -> Unit, onDismiss: () -> Unit
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "Keep Fauxx running in the background",
+                text = "保持 Fauxx 在后台运行",
                 style = MaterialTheme.typography.titleLarge
             )
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "Android aggressively pauses background apps to save battery. " +
-                        "For continuous profile poisoning, Fauxx needs to be exempt from battery optimization.",
+                    text = "Android 会主动暂停后台应用以节省电量。为了持续进行画像污染，Fauxx 需要被排除在电池优化之外。",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    text = "On the next screen, choose \"Allow\" so the engine can keep " +
-                        "generating synthetic activity while your screen is off.",
+                    text = "在下一个屏幕上，选择"允许"以使引擎在屏幕关闭时也能持续生成合成活动。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -651,12 +639,12 @@ private fun BatteryOptimizationDialog(onAllow: () -> Unit, onDismiss: () -> Unit
         },
         confirmButton = {
             TextButton(onClick = onAllow) {
-                Text("Continue")
+                Text("继续")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Not now")
+                Text("暂不")
             }
         }
     )
@@ -668,25 +656,24 @@ private fun ConsentDialog(onAccept: () -> Unit, onDismiss: () -> Unit) {
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "Before you start",
+                text = "开始之前",
                 style = MaterialTheme.typography.titleLarge
             )
         },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = "Fauxx will perform the following background activities:",
+                    text = "Fauxx 将执行以下后台活动：",
                     style = MaterialTheme.typography.bodyMedium
                 )
-                ConsentBullet("Search diverse topics on Google, Bing, DuckDuckGo, and Yahoo")
-                ConsentBullet("Visit a variety of websites to broaden your browsing profile")
-                ConsentBullet("Rotate browser fingerprints (User-Agent, language headers)")
-                ConsentBullet("Generate DNS lookups across varied domains")
-                ConsentBullet("Use battery and mobile data while running in the background")
+                ConsentBullet("在 Google、Bing、DuckDuckGo 和 Yahoo 上搜索各种主题")
+                ConsentBullet("访问各种网站以扩展您的浏览画像")
+                ConsentBullet("轮换浏览器指纹（User-Agent、语言标头）")
+                ConsentBullet("在各个域名上生成 DNS 查询")
+                ConsentBullet("在后台运行时消耗电量和流量")
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "All activity is synthetic and stays on your device. " +
-                        "No personal data is collected or transmitted.",
+                    text = "所有活动均为合成数据，仅保存在您的设备上。不收集或传输任何个人数据。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -694,12 +681,12 @@ private fun ConsentDialog(onAccept: () -> Unit, onDismiss: () -> Unit) {
         },
         confirmButton = {
             TextButton(onClick = onAccept) {
-                Text("I understand, start")
+                Text("我了解，开始")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text("取消")
             }
         }
     )

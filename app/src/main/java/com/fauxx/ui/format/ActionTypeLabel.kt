@@ -11,12 +11,12 @@ import com.fauxx.data.model.ActionType
  */
 val ActionType.label: String
     get() = when (this) {
-        ActionType.SEARCH_QUERY -> "SEARCH"
-        ActionType.AD_CLICK -> "AD CLICK"
-        ActionType.PAGE_VISIT -> "PAGE VISIT"
-        ActionType.LOCATION_SPOOF -> "LOCATION"
+        ActionType.SEARCH_QUERY -> "搜索"
+        ActionType.AD_CLICK -> "广告点击"
+        ActionType.PAGE_VISIT -> "页面访问"
+        ActionType.LOCATION_SPOOF -> "位置"
         ActionType.DNS_LOOKUP -> "DNS"
-        ActionType.COOKIE_HARVEST -> "COOKIES"
-        ActionType.DEEP_LINK_VISIT -> "DEEP LINK"
-        ActionType.FINGERPRINT_ROTATE -> "FINGERPRINT"
+        ActionType.COOKIE_HARVEST -> "Cookie"
+        ActionType.DEEP_LINK_VISIT -> "深层链接"
+        ActionType.FINGERPRINT_ROTATE -> "指纹"
     }

@@ -66,7 +66,7 @@ fun ModulesScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = "MODULES",
+            text = "模块",
             style = MaterialTheme.typography.titleLarge,
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Bold,
@@ -74,38 +74,38 @@ fun ModulesScreen(
         )
 
         ModuleToggleCard(
-            name = "Search Poisoning",
-            description = "Executes search queries across Google, Bing, DuckDuckGo, Yahoo",
+            name = "搜索污染",
+            description = "在 Google、Bing、DuckDuckGo、Yahoo 上执行搜索查询",
             enabled = uiState.searchEnabled,
             onToggle = { viewModel.setSearchEnabled(it) }
         )
         ModuleToggleCard(
-            name = "Cookie Saturation",
-            description = "Visits 10,000+ URLs in background to accumulate diverse tracker cookies",
+            name = "Cookie 饱和",
+            description = "在后台访问 10,000+ 网址以积累多样化的跟踪 Cookie",
             enabled = uiState.cookieEnabled,
             onToggle = { viewModel.setCookieEnabled(it) }
         )
         ModuleToggleCard(
-            name = "DNS Noise",
-            description = "Resolves diverse domains to generate ISP-visible DNS query noise",
+            name = "DNS 噪声",
+            description = "解析多样化域名以生成 ISP 可见的 DNS 查询噪声",
             enabled = uiState.dnsEnabled,
             onToggle = { viewModel.setDnsEnabled(it) }
         )
         ModuleToggleCard(
-            name = "Fingerprint Rotation",
-            description = "Rotates User-Agent, canvas noise, and navigator properties",
+            name = "指纹轮换",
+            description = "轮换 User-Agent、Canvas 噪声和导航器属性",
             enabled = uiState.fingerprintEnabled,
             onToggle = { viewModel.setFingerprintEnabled(it) }
         )
         ModuleToggleCard(
-            name = "Ad Pollution",
-            description = "Loads ad-heavy pages and visits ad preference dashboards",
+            name = "广告污染",
+            description = "加载广告密集页面并访问广告偏好仪表盘",
             enabled = uiState.adEnabled,
             onToggle = { viewModel.setAdEnabled(it) }
         )
         ModuleToggleCard(
-            name = "Location Spoofing",
-            description = "Feeds synthetic GPS routes via MockLocationProvider",
+            name = "位置伪造",
+            description = "通过 MockLocationProvider 注入合成 GPS 路线",
             enabled = uiState.locationEnabled,
             onToggle = { enabled ->
                 viewModel.setLocationEnabled(enabled)
@@ -121,7 +121,7 @@ fun ModulesScreen(
             // below replaces this text with a real success-or-failure signal so users
             // aren't perpetually shown a "warning" when everything's actually fine.
             hint = if (!uiState.locationEnabled) {
-                "Requires Developer Options enabled and Fauxx selected as mock location app"
+                "需要启用开发者选项并将 Fauxx 设为模拟位置信息应用"
             } else null
         )
         // Inline post-mortem of the most recent start() attempt. Issue #48: users
@@ -139,8 +139,8 @@ fun ModulesScreen(
             }
         }
         ModuleToggleCard(
-            name = "App Signals",
-            description = "Opens app store pages for off-profile apps to trigger attribution pixels",
+            name = "应用信号",
+            description = "为偏离画像的应用打开应用商店页面以触发归因像素",
             enabled = uiState.appSignalEnabled,
             onToggle = { viewModel.setAppSignalEnabled(it) }
         )
@@ -217,23 +217,23 @@ private fun LocationSetupHintDialog(onDismiss: () -> Unit) {
     val context = LocalContext.current
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("One more step") },
+        title = { Text("还需一步") },
         text = {
             Text(
-                "Android requires you to designate Fauxx as the mock location app:\n\n" +
-                    "1. Enable Developer Options if you haven't yet: Settings → About phone → tap Build Number 7 times.\n\n" +
-                    "2. Open Developer Options → \"Select mock location app\" and choose Fauxx.\n\n" +
-                    "Without this step, Location Spoofing will silently do nothing."
+                "Android 要求您将 Fauxx 指定为模拟位置信息应用：\n\n" +
+                    "1. 如果尚未启用，请开启开发者选项：设置 → 关于手机 → 连续点击\"版本号\" 7 次。\n\n" +
+                    "2. 打开开发者选项 → \"选择模拟位置信息应用\"并选择 Fauxx。\n\n" +
+                    "如果不执行此步骤，位置伪造将静默失效。"
             )
         },
         confirmButton = {
             TextButton(onClick = {
                 openDeveloperOptionsOrSettings(context)
                 onDismiss()
-            }) { Text("Open Developer Options") }
+            }) { Text("打开开发者选项") }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Got it") }
+            TextButton(onClick = onDismiss) { Text("知道了") }
         }
     )
 }
@@ -280,14 +280,14 @@ private fun LocationSuccessBanner() {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Mock location active",
+                text = "模拟位置已激活",
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "Fauxx is registered as the system mock-location provider and feeding synthetic GPS fixes.",
+                text = "Fauxx 已注册为系统模拟位置提供程序，正在注入合成 GPS 定位。",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
@@ -305,18 +305,18 @@ private fun LocationFailureBanner(failure: LocationDiagnostics.StartFailure) {
     val context = LocalContext.current
     val (headline, detail, showDevOptions) = when (failure) {
         LocationDiagnostics.StartFailure.NOT_MOCK_APP -> Triple(
-            "Fauxx is not the mock location app",
-            "Open Developer Options → Select mock location app → choose Fauxx, then restart the engine.",
+            "Fauxx 不是模拟位置信息应用",
+            "打开开发者选项 → 选择模拟位置信息应用 → 选择 Fauxx，然后重新启动引擎。",
             true
         )
         LocationDiagnostics.StartFailure.SECURITY_EXCEPTION -> Triple(
-            "Mock provider rejected by Android",
-            "The system blocked addTestProvider despite the app op being allowed. Try toggling Fauxx off and back on under Developer Options → Select mock location app, then restart Fauxx.",
+            "模拟提供程序被 Android 拒绝",
+            "系统阻止了 addTestProvider，尽管应用操作已被允许。请尝试在开发者选项 → 选择模拟位置信息应用中关闭再重新开启 Fauxx，然后重启 Fauxx。",
             true
         )
         LocationDiagnostics.StartFailure.RUNTIME_EXCEPTION -> Triple(
-            "Could not register mock provider",
-            "Android refused the mock provider for an unexpected reason. Check app logs for details.",
+            "无法注册模拟提供程序",
+            "Android 因意外原因拒绝了模拟提供程序。请查看应用日志了解详情。",
             false
         )
         else -> Triple("", "", false)
@@ -340,7 +340,7 @@ private fun LocationFailureBanner(failure: LocationDiagnostics.StartFailure) {
             if (showDevOptions) {
                 Spacer(Modifier.height(8.dp))
                 TextButton(onClick = { openDeveloperOptionsOrSettings(context) }) {
-                    Text("Open Developer Options")
+                    Text("打开开发者选项")
                 }
             }
         }

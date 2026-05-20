@@ -75,7 +75,7 @@ fun SettingsScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "SETTINGS",
+            text = "设置",
             style = MaterialTheme.typography.titleLarge,
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Bold,
@@ -84,7 +84,7 @@ fun SettingsScreen(
 
         // Intensity
         SettingsCard {
-            Text("Intensity", style = MaterialTheme.typography.titleSmall)
+            Text("强度", style = MaterialTheme.typography.titleSmall)
             Spacer(Modifier.height(8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 IntensityLevel.values().forEach { level ->
@@ -108,7 +108,7 @@ fun SettingsScreen(
                 }
             }
             Text(
-                text = "${uiState.intensity.actionsPerHour} actions/hour",
+                text = "${uiState.intensity.actionsPerHour} 次/小时",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -150,7 +150,7 @@ fun SettingsScreen(
 
         // Theme
         SettingsCard {
-            Text("Theme", style = MaterialTheme.typography.titleSmall)
+            Text("主题", style = MaterialTheme.typography.titleSmall)
             Spacer(Modifier.height(8.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 ThemeMode.values().forEach { mode ->
@@ -175,9 +175,9 @@ fun SettingsScreen(
             }
             Text(
                 text = when (uiState.themeMode) {
-                    ThemeMode.SYSTEM -> "Follows your device theme"
-                    ThemeMode.LIGHT -> "Always light"
-                    ThemeMode.DARK -> "Always dark"
+                    ThemeMode.SYSTEM -> "跟随设备主题"
+                    ThemeMode.LIGHT -> "始终浅色"
+                    ThemeMode.DARK -> "始终深色"
                 },
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -192,9 +192,9 @@ fun SettingsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
-                    Text("Wi-Fi Only", style = MaterialTheme.typography.titleSmall)
+                    Text("仅 Wi-Fi", style = MaterialTheme.typography.titleSmall)
                     Text(
-                        "Pause when on mobile data",
+                        "使用移动数据时暂停",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -214,11 +214,9 @@ fun SettingsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.weight(1f)) {
-                    Text("Resume after reboot", style = MaterialTheme.typography.titleSmall)
+                    Text("重启后恢复", style = MaterialTheme.typography.titleSmall)
                     Text(
-                        "After a reboot, show a notification to resume protection. " +
-                            "Android blocks apps from silently starting themselves in the background, " +
-                            "so a tap is required.",
+                        "重启后显示通知以恢复保护。Android 不允许应用在后台自行启动，因此需要点击操作。",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -237,7 +235,7 @@ fun SettingsScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("Pause below", style = MaterialTheme.typography.titleSmall)
+                Text("电量低于以下值时暂停", style = MaterialTheme.typography.titleSmall)
                 Text(
                     "${uiState.batteryThreshold}%",
                     color = MaterialTheme.colorScheme.primary,
@@ -258,11 +256,11 @@ fun SettingsScreen(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "Ignore threshold while charging",
+                        "充电时忽略电量阈值",
                         style = MaterialTheme.typography.titleSmall
                     )
                     Text(
-                        "Keep running below the threshold when the device is plugged in.",
+                        "设备连接电源时，即使低于阈值也继续运行。",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -277,7 +275,7 @@ fun SettingsScreen(
 
         // Active hours
         SettingsCard {
-            Text("Active Hours", style = MaterialTheme.typography.titleSmall)
+            Text("活跃时段", style = MaterialTheme.typography.titleSmall)
             Text(
                 "${uiState.allowedHoursStart}:00 – ${uiState.allowedHoursEnd}:00",
                 color = MaterialTheme.colorScheme.primary,
@@ -285,7 +283,7 @@ fun SettingsScreen(
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                "Start",
+                "开始",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -296,7 +294,7 @@ fun SettingsScreen(
                 steps = 22
             )
             Text(
-                "End",
+                "结束",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -307,7 +305,7 @@ fun SettingsScreen(
                 steps = 22
             )
             Text(
-                "Activity is paused outside these hours",
+                "在此时段之外活动将暂停",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -316,8 +314,7 @@ fun SettingsScreen(
             }
             if (windowHours in 1..8) {
                 Text(
-                    "A narrow activity window (${windowHours}h) can itself be a trackable signal. " +
-                        "Wider windows (12h+) are harder for trackers to distinguish from real usage.",
+                    "过窄的活动窗口（${windowHours}小时）本身可能成为可追踪的信号。较宽的时间窗（12小时以上）使追踪器更难以区分真实使用情况。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.error
                 )
@@ -327,15 +324,11 @@ fun SettingsScreen(
         // Custom User-Agent (issue #7)
         SettingsCard {
             Text(
-                "Match my browser",
+                "匹配我的浏览器",
                 style = MaterialTheme.typography.titleSmall
             )
             Text(
-                "By default, Fauxx rotates between many browser identifiers — but " +
-                    "real people usually use one browser, so the variety can itself " +
-                    "look like bot traffic. Tap below to use this device's built-in " +
-                    "browser identifier instead, so the noise blends with your real " +
-                    "activity. Leave blank to keep the default rotation.",
+                "默认情况下，Fauxx 在多种浏览器标识之间轮换——但真实用户通常只使用一个浏览器，因此多样性本身可能看起来像机器人流量。点击下方使用此设备的内置浏览器标识，使噪声与您的真实活动融合。留空则保持默认轮换。",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -353,7 +346,7 @@ fun SettingsScreen(
                     if (!deviceUa.isNullOrBlank()) viewModel.setCustomUserAgent(deviceUa)
                 },
                 modifier = Modifier.fillMaxWidth()
-            ) { Text("Use this device's browser") }
+            ) { Text("使用此设备的浏览器标识") }
             Spacer(Modifier.height(8.dp))
             OutlinedTextField(
                 value = uiState.customUserAgent,
@@ -361,7 +354,7 @@ fun SettingsScreen(
                 modifier = Modifier.fillMaxWidth(),
                 label = {
                     Text(
-                        "Browser identifier (advanced — leave blank to auto-rotate)",
+                        "浏览器标识（高级 — 留空以自动轮换）",
                         style = MaterialTheme.typography.bodySmall
                     )
                 },
@@ -377,7 +370,7 @@ fun SettingsScreen(
                 Spacer(Modifier.height(4.dp))
                 TextButton(
                     onClick = { viewModel.setCustomUserAgent("") }
-                ) { Text("Clear and resume rotation") }
+                ) { Text("清除并恢复轮换") }
             }
         }
 
@@ -389,7 +382,7 @@ fun SettingsScreen(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Clear All Data")
+            Text("清除所有数据")
         }
 
         // Export debug logs
@@ -406,7 +399,7 @@ fun SettingsScreen(
             ),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Export Debug Logs", color = MaterialTheme.colorScheme.onSurface)
+            Text("导出调试日志", color = MaterialTheme.colorScheme.onSurface)
         }
 
         // About & Privacy
@@ -417,7 +410,7 @@ fun SettingsScreen(
             ),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("About & Privacy Policy", color = MaterialTheme.colorScheme.onSurface)
+            Text("关于与隐私政策", color = MaterialTheme.colorScheme.onSurface)
         }
 
         Spacer(Modifier.height(16.dp))
@@ -436,34 +429,34 @@ fun SettingsScreen(
     if (showClearDialog) {
         AlertDialog(
             onDismissRequest = { showClearDialog = false },
-            title = { Text("Clear All Data?") },
+            title = { Text("确认清除所有数据？") },
             text = {
                 Text(
-                    "This will permanently delete:\n" +
-                    "\u2022 All action logs\n" +
-                    "\u2022 Your demographic profile\n" +
-                    "\u2022 Ad platform profile cache\n" +
-                    "\u2022 Persona generation history\n\n" +
-                    "All settings will be reset to defaults. " +
-                    "The engine will stop and return to Layer 0 (uniform noise).\n\n" +
-                    "This cannot be undone."
+                    "这将永久删除：\n" +
+                    "\u2022 所有操作日志\n" +
+                    "\u2022 您的人口统计画像\n" +
+                    "\u2022 广告平台画像缓存\n" +
+                    "\u2022 人格生成历史\n\n" +
+                    "所有设置将恢复为默认值。" +
+                    "引擎将停止并回到第 0 层（均匀噪声）。\n\n" +
+                    "此操作不可撤销。"
                 )
             },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.resetToDefaults()
                     showClearDialog = false
-                }) { Text("Clear Everything", color = MaterialTheme.colorScheme.error) }
+                }) { Text("全部清除", color = MaterialTheme.colorScheme.error) }
             },
             dismissButton = {
-                TextButton(onClick = { showClearDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showClearDialog = false }) { Text("取消") }
             }
         )
     }
 
     if (showLogExportSheet) {
         LogExportSheet(
-            title = "Export Debug Logs",
+            title = "导出调试日志",
             content = exportedLogs,
             fileName = "fauxx_debug_logs.txt",
             onDismiss = { showLogExportSheet = false }

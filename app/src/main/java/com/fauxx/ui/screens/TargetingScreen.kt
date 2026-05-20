@@ -80,7 +80,7 @@ fun TargetingScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = "TARGETING ENGINE",
+            text = "定向引擎",
             style = MaterialTheme.typography.titleLarge,
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Bold,
@@ -89,11 +89,11 @@ fun TargetingScreen(
 
         // Layer 1 toggle
         LayerToggleCard(
-            layerName = "Layer 1 — Self Report",
-            description = "Boosts noise away from your declared demographics",
+            layerName = "第 1 层 — 自我报告",
+            description = "将噪声偏向远离您声明的人口统计特征",
             enabled = uiState.layer1Enabled,
             onToggle = { viewModel.setLayer1Enabled(it) },
-            statusText = if (uiState.hasProfile) "Profile set" else "No profile"
+            statusText = if (uiState.hasProfile) "画像已设置" else "无画像"
         )
 
         // Saved demographic profile (issue #29 — there was no view-or-edit path
@@ -112,20 +112,20 @@ fun TargetingScreen(
 
         // Layer 2 toggle
         val (scrapeLabel, scrapeEnabled) = when (uiState.scrapeState) {
-            ScrapeState.IDLE -> "Scrape Now" to true
-            ScrapeState.RUNNING -> "Scraping…" to false
-            ScrapeState.SUCCESS -> "Done" to false
-            ScrapeState.FAILED -> "Failed — Retry" to true
+            ScrapeState.IDLE -> "立即抓取" to true
+            ScrapeState.RUNNING -> "正在抓取…" to false
+            ScrapeState.SUCCESS -> "完成" to false
+            ScrapeState.FAILED -> "失败 — 重试" to true
             // NEEDS_LOGIN: button stays tappable so user can re-attempt after signing in,
             // but the dialog rendered below is the primary CTA.
-            ScrapeState.NEEDS_LOGIN -> "Sign in first" to true
+            ScrapeState.NEEDS_LOGIN -> "请先登录" to true
         }
         LayerToggleCard(
-            layerName = "Layer 2 — Adversarial Scraper",
-            description = "Reads ad-platform profiles to find confirmed interests",
+            layerName = "第 2 层 — 对抗性抓取器",
+            description = "读取广告平台画像以查找已确认的兴趣",
             enabled = uiState.layer2Enabled,
             onToggle = { viewModel.setLayer2Enabled(it) },
-            statusText = "Last scraped: ${uiState.lastScrapeDate}",
+            statusText = "上次抓取：${uiState.lastScrapeDate}",
             actionLabel = scrapeLabel,
             actionEnabled = scrapeEnabled,
             actionEmphasizeError = uiState.scrapeState == ScrapeState.FAILED ||
@@ -142,12 +142,12 @@ fun TargetingScreen(
 
         // Layer 3 toggle
         LayerToggleCard(
-            layerName = "Layer 3 — Persona Rotation",
-            description = "Maintains coherent synthetic personas (rotates weekly)",
+            layerName = "第 3 层 — 人格轮换",
+            description = "维护连贯的合成人格（每周轮换）",
             enabled = uiState.layer3Enabled,
             onToggle = { viewModel.setLayer3Enabled(it) },
-            statusText = uiState.currentPersonaName?.let { "Persona: $it" } ?: "No persona yet",
-            actionLabel = "Rotate Now",
+            statusText = uiState.currentPersonaName?.let { "人格：$it" } ?: "暂无合成人格",
+            actionLabel = "立即轮换",
             onAction = { viewModel.rotatePersona() }
         )
 
@@ -166,28 +166,28 @@ fun TargetingScreen(
             ),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Clear My Profile")
+            Text("清除我的画像")
         }
     }
 
     if (showClearDialog) {
         AlertDialog(
             onDismissRequest = { showClearDialog = false },
-            title = { Text("Clear Profile?") },
+            title = { Text("确认清除画像？") },
             text = {
                 Text(
-                    "This will delete your demographic profile, all platform data, and persona history. " +
-                    "The engine will revert to uniform random targeting."
+                    "这将删除您的人口统计画像、所有平台数据以及人格历史。" +
+                    "引擎将恢复为均匀随机定向。"
                 )
             },
             confirmButton = {
                 TextButton(onClick = {
                     viewModel.clearProfile()
                     showClearDialog = false
-                }) { Text("Clear", color = MaterialTheme.colorScheme.error) }
+                }) { Text("清除", color = MaterialTheme.colorScheme.error) }
             },
             dismissButton = {
-                TextButton(onClick = { showClearDialog = false }) { Text("Cancel") }
+                TextButton(onClick = { showClearDialog = false }) { Text("取消") }
             }
         )
     }
@@ -203,7 +203,7 @@ private fun ProfileSummaryCard(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "MY PROFILE",
+                text = "我的画像",
                 style = MaterialTheme.typography.titleSmall,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
@@ -213,7 +213,7 @@ private fun ProfileSummaryCard(
 
             if (!state.hasProfile) {
                 Text(
-                    text = "No profile saved. Setting one up lets Layer 1 steer the noise away from your real demographics.",
+                    text = "未保存画像。设置画像可让第 1 层将噪声引导至远离您真实人口统计特征的方向。",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -221,16 +221,16 @@ private fun ProfileSummaryCard(
                 Button(
                     onClick = onEditProfile,
                     modifier = Modifier.fillMaxWidth()
-                ) { Text("Set up profile") }
+                ) { Text("设置画像") }
                 return@Card
             }
 
-            ProfileSummaryRow(label = "Age", value = state.ageRange?.let { stringResource(it.displayNameRes()) })
-            ProfileSummaryRow(label = "Gender", value = state.gender?.let { stringResource(it.displayNameRes()) })
-            ProfileSummaryRow(label = "Profession", value = state.profession?.let { stringResource(it.displayNameRes()) })
-            ProfileSummaryRow(label = "Region", value = state.region?.let { stringResource(it.displayNameRes()) })
+            ProfileSummaryRow(label = "年龄", value = state.ageRange?.let { stringResource(it.displayNameRes()) })
+            ProfileSummaryRow(label = "性别", value = state.gender?.let { stringResource(it.displayNameRes()) })
+            ProfileSummaryRow(label = "职业", value = state.profession?.let { stringResource(it.displayNameRes()) })
+            ProfileSummaryRow(label = "地区", value = state.region?.let { stringResource(it.displayNameRes()) })
             ProfileSummaryRow(
-                label = "Interests",
+                label = "兴趣",
                 value = if (state.interests.isEmpty()) null
                 else state.interests
                     .joinToString(", ") { it.name.lowercase().replace('_', ' ') }
@@ -240,7 +240,7 @@ private fun ProfileSummaryCard(
             OutlinedButton(
                 onClick = onEditProfile,
                 modifier = Modifier.fillMaxWidth()
-            ) { Text("Edit my profile") }
+            ) { Text("编辑我的画像") }
         }
     }
 }
@@ -257,7 +257,7 @@ private fun ProfileSummaryRow(label: String, value: String?) {
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
-            text = value ?: "—",
+            text = value ?: "——",
             style = MaterialTheme.typography.bodySmall,
             color = if (value != null) MaterialTheme.colorScheme.onSurface
             else MaterialTheme.colorScheme.onSurfaceVariant,
@@ -333,7 +333,7 @@ private fun WeightChart(weights: Map<CategoryPool, Float>) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "CATEGORY WEIGHTS",
+                text = "类别权重",
                 style = MaterialTheme.typography.labelMedium,
                 fontFamily = FontFamily.Monospace,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -375,13 +375,13 @@ private fun CustomInterestsCard(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Custom Interests",
+                text = "自定义兴趣",
                 style = MaterialTheme.typography.titleSmall,
                 fontFamily = FontFamily.Monospace,
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = "Add specific interests to suppress (mapped to nearest category)",
+                text = "添加要压制的特定兴趣（映射到最近的类别）",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -397,7 +397,7 @@ private fun CustomInterestsCard(
                     value = textFieldValue,
                     onValueChange = { textFieldValue = it },
                     modifier = Modifier.weight(1f),
-                    placeholder = { Text("e.g., woodworking") },
+                    placeholder = { Text("例如：木工") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = {
@@ -413,7 +413,7 @@ private fun CustomInterestsCard(
                         textFieldValue = ""
                     }
                 }) {
-                    Icon(Icons.Default.Add, contentDescription = "Add interest")
+                    Icon(Icons.Default.Add, contentDescription = "添加兴趣")
                 }
             }
 
@@ -428,7 +428,7 @@ private fun CustomInterestsCard(
                         val label = if (categoryLabel != null) {
                             "${mapping.interest} → $categoryLabel"
                         } else {
-                            "${mapping.interest} (unmapped)"
+                            "${mapping.interest}（未映射）"
                         }
                         InputChip(
                             selected = true,
@@ -437,7 +437,7 @@ private fun CustomInterestsCard(
                             trailingIcon = {
                                 Icon(
                                     Icons.Default.Close,
-                                    contentDescription = "Remove",
+                                    contentDescription = "移除",
                                     modifier = Modifier.size(16.dp)
                                 )
                             }
@@ -497,26 +497,23 @@ private fun WeightBar(label: String, value: Float, color: Color) {
 private fun ScrapeNeedsLoginDialog(onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Layer 2 couldn't read your ad profiles") },
+        title = { Text("第 2 层无法读取您的广告画像") },
         text = {
             Text(
-                "The Adversarial Scraper tries to read what Google and Facebook think " +
-                    "they know about you, then steers the noise away from those interests. " +
-                    "It just got back an empty list, which usually means the scraper has " +
-                    "no signed-in session for those sites.\n\n" +
-                    "Heads-up: Fauxx's scraper has its own browser session, separate from " +
-                    "Chrome/Brave/Firefox where you may already be signed in — Android " +
-                    "doesn't let apps share login cookies with each other. And Google/" +
-                    "Facebook don't allow sign-in from an in-app browser either, so a " +
-                    "'sign in here' button isn't possible.\n\n" +
-                    "Layer 2 is being redesigned to import your ad profile directly " +
-                    "(via Google Takeout or a browser bookmarklet) so it doesn't need a " +
-                    "live session at all. In the meantime, Layers 1 and 3 still work " +
-                    "without any scraping."
+                "对抗性抓取器会尝试读取 Google 和 Facebook 认为它们掌握的关于您的信息，" +
+                    "然后将噪声引导至远离这些兴趣的方向。" +
+                    "它刚刚返回了一个空列表，这通常意味着抓取器没有这些网站的登录会话。\n\n" +
+                    "请注意：Fauxx 的抓取器拥有自己的浏览器会话，与您可能已登录的 Chrome/Brave/Firefox 相互独立——" +
+                    "Android 不允许应用之间共享登录 Cookie。而且 Google/" +
+                    "Facebook 也不允许从应用内浏览器登录，因此" +
+                    "无法提供"在此登录"按钮。\n\n" +
+                    "第 2 层正在重新设计，以直接导入您的广告画像" +
+                    "（通过 Google Takeout 或浏览器书签工具），从而完全不需要" +
+                    "实时会话。同时，第 1 层和第 3 层仍然可以在没有任何抓取的情况下正常工作。"
             )
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text("Got it") }
+            TextButton(onClick = onDismiss) { Text("知道了") }
         }
     )
 }

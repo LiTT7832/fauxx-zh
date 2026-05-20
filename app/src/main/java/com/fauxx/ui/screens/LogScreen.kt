@@ -83,20 +83,20 @@ fun LogScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "ACTION LOG",
+                text = "操作日志",
                 style = MaterialTheme.typography.titleLarge,
                 fontFamily = FontFamily.Monospace,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
             IconButton(onClick = { showExportMenu = true }) {
-                Icon(Icons.Default.Download, "Export")
+                Icon(Icons.Default.Download, "导出")
                 DropdownMenu(
                     expanded = showExportMenu,
                     onDismissRequest = { showExportMenu = false }
                 ) {
                     DropdownMenuItem(
-                        text = { Text("Export CSV") },
+                        text = { Text("导出 CSV") },
                         onClick = {
                             showExportMenu = false
                             viewModel.exportCsv { csv ->
@@ -105,7 +105,7 @@ fun LogScreen(
                         }
                     )
                     DropdownMenuItem(
-                        text = { Text("Export JSON") },
+                        text = { Text("导出 JSON") },
                         onClick = {
                             showExportMenu = false
                             viewModel.exportJson { json ->
@@ -127,7 +127,7 @@ fun LogScreen(
                 FilterChip(
                     selected = uiState.filter == null,
                     onClick = { viewModel.setFilter(null) },
-                    label = { Text("All") }
+                    label = { Text("全部") }
                 )
             }
             items(ActionType.values()) { type ->
@@ -200,11 +200,11 @@ private fun LogEntryRow(entry: ActionLogEntity) {
                     Spacer(Modifier.height(8.dp))
                     HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f))
                     Spacer(Modifier.height(8.dp))
-                    DetailRow("Type", entry.actionType.name)
-                    DetailRow("Category", entry.category.name)
-                    DetailRow("Detail", entry.detail.removePrefix("[${entry.category}] "))
-                    DetailRow("Time", FULL_DATE_FORMAT.format(Date(entry.timestamp)))
-                    DetailRow("Status", if (entry.success) "Success" else "Failed")
+                    DetailRow("类型", entry.actionType.name)
+                    DetailRow("类别", entry.category.name)
+                    DetailRow("详情", entry.detail.removePrefix("[${entry.category}] "))
+                    DetailRow("时间", FULL_DATE_FORMAT.format(Date(entry.timestamp)))
+                    DetailRow("状态", if (entry.success) "成功" else "失败")
                 }
             }
         }
@@ -241,5 +241,5 @@ private fun shareText(
         putExtra(Intent.EXTRA_TEXT, text)
         putExtra(Intent.EXTRA_SUBJECT, filename)
     }
-    context.startActivity(Intent.createChooser(intent, "Export Log"))
+    context.startActivity(Intent.createChooser(intent, "导出日志"))
 }
